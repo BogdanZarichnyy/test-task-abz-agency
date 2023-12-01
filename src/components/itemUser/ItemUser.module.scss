@@ -1,0 +1,38 @@
+@import '../../sass/utils/variables';
+@import '../../sass/utils/functions';
+@import '../../sass/utils/mixins';
+
+.userCard {
+    background-color: getColor('main');
+    padding: 20px;
+    border-radius: 10px;
+    @include font();
+}
+
+.userPhoto {
+    display: block;
+    margin: 0 auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.userName, .userPosition {
+    margin-top: 20px;
+}
+
+.userName, .userEmail {
+    cursor: pointer;
+}
+
+.userName, .userPosition, .userEmail, .userPhone {
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.preloader {
+    margin: 0 auto;
+}

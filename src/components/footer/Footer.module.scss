@@ -1,0 +1,13 @@
+@import '../../sass/utils/variables';
+@import '../../sass/utils/functions';
+@import '../../sass/utils/mixins';
+
+.footer {
+    padding: 0 0 100px;
+    text-align: center;
+}
+
+.title {
+    margin: 0 auto;
+    @include font(40px, 40px);
+}

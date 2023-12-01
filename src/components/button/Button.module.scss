@@ -1,0 +1,22 @@
+@import '../../sass/utils/variables';
+@import '../../sass/utils/functions';
+@import '../../sass/utils/mixins';
+
+.button {
+    display: inline-block;
+    background-color: getColor('primary');
+    border: 0;
+    border-radius: 80px;
+    padding: 4px 0;
+    width: 100px;
+    text-align: center;
+    font-family: Nunito;
+    font-weight: 400;
+    @include font();
+    color: getColor('text-main');
+
+    &:disabled {
+        color: getColor('main');
+        background-color: getColor('disable');
+    }
+}

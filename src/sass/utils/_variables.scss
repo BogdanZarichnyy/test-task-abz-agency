@@ -1,0 +1,25 @@
+// Colors
+$colors: (
+    // backgrounds
+    'main': #FFFFFF,
+    'primary': #F4E041,
+    'secondary': #00BDD3,
+    'background': #F8F8F8,
+    'disable': #B4B4B4,
+
+    // text
+    'text-main': #000000,
+    'text-desc': #7E7E7E,
+
+    // border
+    'border-desc': #D0CFCF,
+
+    // effects
+    'error': #CB3D40,
+);
+
+// Resolution points
+$mobile: 360px;
+$tablet: 768px;
+$desktop: 1024px;
+$landscapeDesktop: 2560px;

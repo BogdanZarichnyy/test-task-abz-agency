@@ -1,0 +1,62 @@
+.input {
+  background-color: inherit;
+  padding: 14px 16px;
+  font-family: Nunito;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.63;
+  color: #000000;
+  border: 1px solid #D0CFCF;
+  border-radius: 4px;
+  width: 100%;
+  outline: transparent;
+}
+.input:focus {
+  border-color: #D0CFCF;
+}
+.input:not(:-moz-placeholder-shown) + span {
+  font-size: 12px;
+  line-height: 1.17;
+  top: 0;
+  padding: 0 4px;
+  background-color: #F8F8F8;
+}
+.input:focus + span, .input:not(:placeholder-shown) + span {
+  font-size: 12px;
+  line-height: 1.17;
+  top: 0;
+  padding: 0 4px;
+  background-color: #F8F8F8;
+}
+
+.inputInvalid {
+  border-color: #CB3D40;
+}
+.inputInvalid:focus {
+  border-color: #CB3D40;
+}
+.inputInvalid + span, .inputInvalid:focus + span {
+  color: #CB3D40;
+}
+
+.errorFeedback {
+  position: absolute;
+  left: 17px;
+  bottom: -15px;
+  color: #7E7E7E;
+  font-size: 12px;
+  line-height: 1.17;
+}
+
+.isErrorFeedback {
+  color: #CB3D40;
+}
+
+.phoneLabelExample {
+  position: absolute;
+  left: 17px;
+  bottom: -15px;
+  color: #7E7E7E;
+  font-size: 12px;
+  line-height: 1.17;
+}/*# sourceMappingURL=CustomTextInput.module.css.map */

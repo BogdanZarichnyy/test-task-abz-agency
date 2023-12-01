@@ -1,0 +1,19 @@
+.preloader {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.preloaderIcon {
+  display: inline-block;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(-360deg);
+  }
+}/*# sourceMappingURL=Preloader.module.css.map */

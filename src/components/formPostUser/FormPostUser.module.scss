@@ -1,0 +1,52 @@
+@import '../../sass/utils/variables';
+@import '../../sass/utils/functions';
+@import '../../sass/utils/mixins';
+
+.form {
+    margin: 50px auto 0;
+    width: 100%;
+
+    @media screen and (min-width: $tablet) {
+        width: 380px;
+    }
+}
+
+.buttonSubmit {
+    margin-top: 50px;
+}
+
+// .labelInputArea {
+//     height: 180px;
+
+//     @media screen and (min-width: $tablet) {
+//         grid-column: 1 / span 1 ;
+//         grid-row: 2 /span 2;
+//     }
+// }
+
+// .inputArea {
+//     height: 156px;
+//     resize: none;
+// }
+
+// .buttonSubmit {
+//     display: block;
+//     width: 100%;
+//     margin-top: 40px;
+
+//     @media screen and (min-width: $tablet) {
+//         display: block;
+//         width: 193px;
+//         margin-left: auto;
+//     }
+// }
+
+// .buttonSubmitDisable {
+//     background-color: getColor('disable');
+//     cursor: auto;
+
+//     &:hover,
+//     &:focus {
+//         background-color: getColor('disable');
+//     }
+// }

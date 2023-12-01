@@ -1,0 +1,24 @@
+@import '../../../../sass/utils/variables';
+@import '../../../../sass/utils/functions';
+@import '../../../../sass/utils/mixins';
+
+.labelInput {
+    display: block;
+    position: relative;
+    color: getColor('text-desc');
+    font-family: Nunito;
+    font-weight: 400;
+    @include font();
+}
+
+.labelInput + .labelInput {
+    margin-top: 50px;
+}
+
+.textLabel {
+    position: absolute;
+    left: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    @include transition-effect(top font-size line-height);
+}

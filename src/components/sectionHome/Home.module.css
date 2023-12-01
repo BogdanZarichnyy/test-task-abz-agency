@@ -1,0 +1,46 @@
+.home {
+  padding: 40px 0 71px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("../../images/pexels-alexandr-podvalny-1227513.jpg"), lightgray -952.661px -317.009px/342.315% 164.03% no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #FFFFFF;
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  .home {
+    padding: 89px 0 88px;
+    background-size: contain;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .home {
+    padding: 164px 0 163px;
+  }
+}
+
+.title {
+  margin: 0 auto;
+  font-size: 40px;
+  line-height: 1;
+}
+@media screen and (min-width: 768px) {
+  .title {
+    width: 380px;
+  }
+}
+
+.paragraph {
+  margin: 21px auto 0;
+  font-size: 16px;
+  line-height: 1.63;
+}
+@media screen and (min-width: 768px) {
+  .paragraph {
+    width: 380px;
+  }
+}
+
+.buttonHome {
+  margin-top: 32px;
+}/*# sourceMappingURL=Home.module.css.map */

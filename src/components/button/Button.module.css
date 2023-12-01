@@ -1,0 +1,18 @@
+.button {
+  display: inline-block;
+  background-color: #F4E041;
+  border: 0;
+  border-radius: 80px;
+  padding: 4px 0;
+  width: 100px;
+  text-align: center;
+  font-family: Nunito;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.63;
+  color: #000000;
+}
+.button:disabled {
+  color: #FFFFFF;
+  background-color: #B4B4B4;
+}/*# sourceMappingURL=Button.module.css.map */

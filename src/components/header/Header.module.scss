@@ -1,0 +1,19 @@
+@import '../../sass/utils/variables';
+@import '../../sass/utils/functions';
+// @import '../../sass/utils/mixins';
+
+.header {
+    padding: 13px 0;
+    background-color: getColor('main');
+}
+
+.wrraper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navigation button + button {
+    margin-left: 10px;
+}
