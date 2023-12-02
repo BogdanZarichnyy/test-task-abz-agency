@@ -1,5 +1,13 @@
 import * as Yup from 'yup';
 
+const validFileExtensions = { image: ['jpg', 'jpeg'] };
+
+const isValidFileType = (fileName, fileType) => {
+    console.log(fileName.name);
+    console.log(fileName.size);
+    // return fileName && validFileExtensions[fileType].indexOf(fileName.toLowerCase().split('.').pop()) > -1;
+}
+
 const yupSchema = Yup.object().shape({
     name: Yup.string()
         .min(2, "Must be at least 2 characters")
@@ -13,14 +21,30 @@ const yupSchema = Yup.object().shape({
     phone: Yup.string()
         .matches(/^[\+]{0,1}380([0-9]{9})$/, "+38 (XXX) XXX - XX - XX")
         .required("Phone number is a required field"),
-    // position_id: Yup.number()
-    //     .min(1, "Must be at least 1 character")
-    //     .required(),
-    // photo: Yup.string()
-    //     .max(30, "Must be at most 30 characters")
-    //     .matches(/^(?! )(?!-)[a-zA-Z\d\s-]+$/, "Invalid input")
-    //     .nonNullable()
-    //     .required("Photo is a required field"),
+    position_id: Yup.number()
+        .min(1, "Must be at least 1 character")
+        .required(),
+    photo: Yup.mixed()
+        .test("is-valid-type", "Not a valid image type - select image type *.jpg or .*jpeg",
+            (filePhotoUser) => isValidFileType(filePhotoUser, "image"))
+        // .test("is-valid-size", "The file must not exceed 5 MB", 
+        //     (filePhotoUser, filePhotoUserInfo) => {
+        //         console.log(filePhotoUser);
+        //         console.log(filePhotoUserInfo);
+        //         if (!filePhotoUser.length) return true;
+        //         return filePhotoUser.size <= 50000000;
+        //     })
+        // .test({
+        //     message: 'Please provide a supported file type',
+        //     test: (file, context) => {
+        //     console.log(file);
+        //     console.log(context);
+        //         // const isValid = ['png', 'pdf'].includes(getExtension(file?.name));
+        //         // if (!isValid) context?.createError();
+        //         // return isValid;
+        //     }
+        //   })
+        .required('Photo is required')
 });
 
 export default yupSchema;

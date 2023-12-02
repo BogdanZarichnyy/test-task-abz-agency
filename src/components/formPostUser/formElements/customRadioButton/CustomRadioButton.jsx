@@ -1,69 +1,46 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { Field } from 'formik';
 
 import { getPositions } from '../../../../api/fetching';
 
-import { usePositionsUsers } from '../../../../hooks/usePositionsUsers';
-
 import scss from './CustomRadioButton.module.scss';
 
-const CustomRadioButton = ({ stylesInput, setFieldValue, setFieldTouched, handleChange, error, touched, name }) => {
+const CustomRadioButton = ({ children, as = 'input', setFieldTouched, handleChange, type, name }) => {
     const [positions, setPositions] = useState([]);
+    const [idOptionsForPositionChecked, setIdOptionsForPositionChecked] = useState(1);
 
-    console.log(positions);
+    const textLabelForRadioBox = children.props.children;
 
-    usePositionsUsers(positions, setPositions);
-
-    // const positionsUsers = usePositionsUsers(setPositions);
-
-    // console.log(usePositionsUsers(setPositions));
-
-    // useEffect(() => {
-    //     getPositions(setPositions);
-    // }, []);
-
-    // const positionsUsers = useMemo(() => {
-    //     getPositions(setPositions);
-    // }, []);
+    useEffect(() => {
+        getPositions(setPositions);
+    }, []);
 
     return (
-        <>
-            {/* {!!positionsUsers.length && positionsUsers.map((position) =>  */}
-            {!!positions.length && positions.map((position) => 
-                <Field key={position.id}
-                    onChange={event => {
-                        setFieldTouched(name);
-                        handleChange(event);
-                    }}
-                    className={scss.radioButton} 
-                    type="radio" name={name} 
-                    // {...position.id === 1 && checked}
-                >
+        <div className={scss.customRadioButtons} >
 
-                </Field>
-            )}
+            <p className={scss.positionTitle}>{textLabelForRadioBox}</p>
 
-            {/* <label>
-                <input class="radio_box" type="radio" name="rd">
-                <span class="radio_style"></span>
-                radiobox
-            </label>
-            <label>
-                <input class="radio_box" type="radio" name="rd" checked>
-                <span class="radio_style"></span>
-                radiobox checked
-            </label>
-            <label>
-                <input class="radio_box" type="radio" name="rdb" disabled>
-                <span class="radio_style"></span>
-                radiobox disabled
-            </label>
-            <label>
-                <input class="radio_box" type="radio" name="rdb" disabled checked>
-                <span class="radio_style"></span>
-                radiobox disabled checked
-            </label> */}
-        </>
+            <div className={scss.positions} role="group">
+                {!!positions.length && positions.map((position) => 
+                    <label className={scss.optionsInput} key={position.id}>
+                        <Field as={as}
+                            onChange={event => {
+                                setFieldTouched(name);
+                                handleChange(event);
+                                setIdOptionsForPositionChecked(position.id);
+                            }}
+                            className={scss.radioBox} 
+                            type={type} name={name} 
+                            value={position.id}
+                            checked={position.id === idOptionsForPositionChecked ? true : false}
+                        />
+                        <span className={scss.radioButton}></span>
+                        <span className={scss.labelOptionInput}>{position.name}</span>
+                    </label>
+                )}
+            </div>
+
+        </div>
     )
 }
 

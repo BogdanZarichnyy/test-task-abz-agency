@@ -1,5 +1,8 @@
 // import axios from "axios";
 
+const urlFetchRequestForUsers = new URL('https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6');
+const urlFetchRequestForPositions = new URL('https://frontend-test-assignment-api.abz.agency/api/v1/positions');
+
 export const getUsersFirst = (setNextUrl, setUsers) => {
     // try {
     //     const response = await axios.get("https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6");
@@ -12,7 +15,7 @@ export const getUsersFirst = (setNextUrl, setUsers) => {
     //     console.log(error)
     // }
 
-    fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6')
+    fetch(urlFetchRequestForUsers)
         .then((response) => {
             if (!response.ok) {
                 throw new Error(response.status);
@@ -78,8 +81,7 @@ export const getUserAvatar = (userPhoto, setIsShowPreloader, setUrlUserAvatar) =
 }
 
 export const getPositions = (setPositions) => {
-    // console.log(setPositions);
-    fetch('https://frontend-test-assignment-api.abz.agency/api/v1/positions')
+    fetch(urlFetchRequestForPositions)
         .then(response => {
             if (!response.ok) {
                 throw new Error(response.status);

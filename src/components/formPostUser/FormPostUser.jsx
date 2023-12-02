@@ -1,12 +1,9 @@
-import { useEffect, useState, useMemo } from 'react';
 import { Form, Formik } from 'formik';
 import CustomInput from "./formElements/customInput/CustomInput";
 import CustomTextInput from './formElements/customTextInput/CustomTextInput';
 import CustomRadioButton from './formElements/customRadioButton/CustomRadioButton';
+import CustomPhotoUploadInput from './formElements/customPhotoUploadInput/CustomPhotoUploadInput';
 import Button from '../button/Button';
-
-// import { getPositions } from '../../api/fetching';
-// import { usePositionsUsers } from '../../hooks/usePositionsUsers';
 
 import yupSchema from '../../validation/yupSchema';
 
@@ -16,27 +13,16 @@ const initialDataForRegistrationUser = {
     name: '',
     email: '',
     phone: '',
-    position_id: 0,
-    photo: null
+    position_id: 1,
+    photo: ''
 }
 
 const FormPostUser = () => {
-    // const [positions, setPositions] = useState([]);
-
-    // console.log(positions);
-    // console.log(setPositions);
-
-    // const positionsUsers = useMemo(() => getPositions(setPositions), []);
-    // usePositionsUsers(setPositions);
-
-    // useEffect(() => {
-    //     getPositions(setPositions);
-    // }, []);
 
     const handlerRegistrationUser = (values, actions) => {
         console.log(values);
         actions.setSubmitting(false);
-        actions.resetForm();
+        // actions.resetForm();
     }
 
     return (
@@ -51,9 +37,9 @@ const FormPostUser = () => {
             const isDisableSubmit = 
                 !errors.name & !!values.name &
                 !errors.email & !!values.email & 
-                !errors.phone & !!values.phone  
-                // !errors.position_id & !!values.position_id 
-                // & !!values.photo;
+                !errors.phone & !!values.phone &
+                !errors.position_id & !!values.position_id &
+                !!values.photo;
 
             return (
                 <Form className={scss.form}>
@@ -66,6 +52,7 @@ const FormPostUser = () => {
                     />
 
                     <CustomInput name="email" label="Email" 
+                        type="email"
                         CustomComponent={CustomTextInput} 
                         setFieldValue={setFieldValue}
                         setFieldTouched={setFieldTouched}
@@ -73,6 +60,7 @@ const FormPostUser = () => {
                     />
 
                     <CustomInput name="phone" label="Phone" 
+                        type="tel"
                         CustomComponent={CustomTextInput} 
                         setFieldValue={setFieldValue}
                         setFieldTouched={setFieldTouched}
@@ -80,73 +68,23 @@ const FormPostUser = () => {
                     />
 
                     <CustomInput name="position_id" label="Select your position"
-                        // styleLabel={scss.labelInputArea}
-                        // stylesInput={scss.inputArea} 
-                        // positions={positions}
+                        type="radio"
+                        styleLabel={scss.labelInputRadioBox} 
                         CustomComponent={CustomRadioButton} 
                         setFieldValue={setFieldValue}
                         setFieldTouched={setFieldTouched}
                         handleChange={handleChange}
                     />
 
-                    {/* <CustomInput name="description" label="Description"
-                        as='textarea'
-                        styleLabel={scss.labelInputArea}
-                        stylesInput={scss.inputArea} 
-                        CustomComponent={CustomTextInput} 
+                    <CustomInput name="photo" label="Upload your photo"
+                        type="file"
+                        styleLabel={scss.labelInputPhotoUpload} 
+                        CustomComponent={CustomPhotoUploadInput} 
                         setFieldValue={setFieldValue}
                         setFieldTouched={setFieldTouched}
                         handleChange={handleChange}
+                        file={values.photo}
                     />
-
-                    <CustomInput name="date" label="Select date" 
-                        CustomComponent={CustomDatePicker} 
-                        values={values}
-                        setFieldValue={setFieldValue}
-                        setFieldTouched={setFieldTouched}
-                        handleChange={handleChange}
-                        placeholder='Select Date'
-                    />
-
-                    <CustomInput name="time" label="Select time" 
-                        CustomComponent={CustomTimePicker} 
-                        values={values}
-                        setFieldValue={setFieldValue}
-                        setFieldTouched={setFieldTouched}
-                        placeholder='Select Time'
-                    />
-
-                    <CustomInput name="location" label="Location"
-                        CustomComponent={CustomTextInput} 
-                        setFieldValue={setFieldValue}
-                        setFieldTouched={setFieldTouched}
-                        handleChange={handleChange}
-                    />
-                    
-                    <CustomInput name="category" label="Category"
-                        CustomComponent={CustomSelectInput} 
-                        options={categoryOptions}
-                        setFieldValue={setFieldValue}
-                        setFieldTouched={setFieldTouched}
-                        values={values.category}
-                        placeholder='Select Category'
-                    />
-
-                    <CustomInput name="picture" label="Add picture"
-                        CustomComponent={CustomTextInput} 
-                        setFieldValue={setFieldValue}
-                        setFieldTouched={setFieldTouched}
-                        handleChange={handleChange}
-                    />
-
-                    <CustomInput name="priority" label="Priority"
-                        CustomComponent={CustomSelectInput} 
-                        options={priorityOptions}
-                        setFieldValue={setFieldValue}
-                        setFieldTouched={setFieldTouched}
-                        values={values.priority}
-                        placeholder='Select Priority'
-                    /> */}
 
                     <Button styles={scss.buttonSubmit} text="Sign up" type="submit" disabled={!isDisableSubmit} />
 

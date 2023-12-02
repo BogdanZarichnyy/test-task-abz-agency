@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import FormPostUser from '../formPostUser/FormPostUser';
 import textsHeaders from '../../assets/texts/textsHeaders';
 
-import { getPositions } from '../../api/fetching';
+// import { getPositions } from '../../api/fetching';
 // import { usePositionsUsers } from '../../hooks/usePositionsUsers';
 
 import scss from './Footer.module.scss';
