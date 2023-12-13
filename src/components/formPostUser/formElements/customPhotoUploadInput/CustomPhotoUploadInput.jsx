@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Field, ErrorMessage } from 'formik';
 
 import scss from './CustomPhotoUploadInput.module.scss';
@@ -57,3 +58,14 @@ const CustomPhotoUploadInput = ({ children, as = 'input', setFieldValue, error, 
 };
 
 export default CustomPhotoUploadInput;
+
+CustomPhotoUploadInput.propTypes = {
+    children: PropTypes.object,
+    as: PropTypes.string,
+    setFieldValue: PropTypes.func,
+    error: PropTypes.string,
+    touched: PropTypes.bool,
+    type: PropTypes.string,
+    name: PropTypes.string,
+    // file: PropTypes.object,
+};

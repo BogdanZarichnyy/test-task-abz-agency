@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Field } from 'formik';
 
 import { getPositions } from '../../../../api/fetching';
@@ -45,3 +46,12 @@ const CustomRadioButton = ({ children, as = 'input', setFieldTouched, handleChan
 }
 
 export default CustomRadioButton;
+
+CustomRadioButton.propTypes = {
+    children: PropTypes.object,
+    as: PropTypes.string,
+    setFieldTouched: PropTypes.func,
+    handleChange: PropTypes.func,
+    type: PropTypes.string,
+    name: PropTypes.string,
+};

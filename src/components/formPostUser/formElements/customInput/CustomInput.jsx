@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useField } from 'formik';
 
 import scss from './CustomInput.module.scss';
@@ -16,4 +17,12 @@ const CustomInput = ({ label, styleLabel, CustomComponent, ...props }) => {
         </label>
     );
 };
+
 export default CustomInput;
+
+CustomInput.propTypes = {
+    label: PropTypes.string,
+    styleLabel: PropTypes.string,
+    CustomComponent: PropTypes.func,
+    props: PropTypes.object,
+};

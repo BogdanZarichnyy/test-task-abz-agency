@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import sprite from '../../images/sprite.svg';
 
 import scss from './Preloader.module.scss';
@@ -13,3 +14,7 @@ const Preloader = ({ styles }) => {
 };
 
 export default Preloader;
+
+Preloader.propTypes = {
+    styles: PropTypes.string
+};

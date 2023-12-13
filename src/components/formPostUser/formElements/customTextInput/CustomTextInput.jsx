@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import { Field, ErrorMessage } from 'formik';
 
 import scss from './CustomTextInput.module.scss';
 
-const CustomTextInput = ({ children, as = 'input', stylesInput, setFieldValue, setFieldTouched, handleChange, error, touched, type ='text', name, placeholder = ' ' }) => {
+const CustomTextInput = ({ children, as = 'input', stylesInput, setFieldTouched, handleChange, error, touched, type ='text', name, placeholder = ' ' }) => {
     return (
         <>
             <Field as={as}
@@ -21,3 +22,16 @@ const CustomTextInput = ({ children, as = 'input', stylesInput, setFieldValue, s
 };
 
 export default CustomTextInput;
+
+CustomTextInput.propTypes = {
+    children: PropTypes.object,
+    as: PropTypes.string,
+    stylesInput: PropTypes.string,
+    setFieldTouched: PropTypes.func,
+    handleChange: PropTypes.func,
+    error: PropTypes.string,
+    touched: PropTypes.bool,
+    type: PropTypes.string,
+    name: PropTypes.string,
+    placeholder: PropTypes.string,
+};

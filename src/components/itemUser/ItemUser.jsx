@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Preloader from '../preloader/Preloader';
 
 import { getUserAvatar } from '../../api/fetching';
@@ -36,3 +37,14 @@ const ItemUser = ({ userData }) => {
 };
 
 export default ItemUser;
+
+ItemUser.propTypes = {
+    userData: PropTypes.shape({
+        id: PropTypes.number,
+        photo: PropTypes.string,
+        name: PropTypes.string,
+        position: PropTypes.string,
+        email: PropTypes.string,
+        phone: PropTypes.string
+    }),
+}

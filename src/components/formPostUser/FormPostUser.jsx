@@ -1,4 +1,5 @@
 import { Form, Formik } from 'formik';
+import PropTypes from 'prop-types';
 import CustomInput from "./formElements/customInput/CustomInput";
 import CustomTextInput from './formElements/customTextInput/CustomTextInput';
 import CustomRadioButton from './formElements/customRadioButton/CustomRadioButton';
@@ -64,7 +65,7 @@ const FormPostUser = ({ setIsSuccessfullyRegistered }) => {
 
                     <CustomInput name="name" label="Your name" 
                         CustomComponent={CustomTextInput} 
-                        setFieldValue={setFieldValue}
+                        // setFieldValue={setFieldValue}
                         setFieldTouched={setFieldTouched}
                         handleChange={handleChange}
                     />
@@ -72,7 +73,7 @@ const FormPostUser = ({ setIsSuccessfullyRegistered }) => {
                     <CustomInput name="email" label="Email" 
                         type="email"
                         CustomComponent={CustomTextInput} 
-                        setFieldValue={setFieldValue}
+                        // setFieldValue={setFieldValue}
                         setFieldTouched={setFieldTouched}
                         handleChange={handleChange}
                     />
@@ -80,7 +81,7 @@ const FormPostUser = ({ setIsSuccessfullyRegistered }) => {
                     <CustomInput name="phone" label="Phone" 
                         type="tel"
                         CustomComponent={CustomTextInput} 
-                        setFieldValue={setFieldValue}
+                        // setFieldValue={setFieldValue}
                         setFieldTouched={setFieldTouched}
                         handleChange={handleChange}
                     />
@@ -112,3 +113,7 @@ const FormPostUser = ({ setIsSuccessfullyRegistered }) => {
 };
 
 export default FormPostUser;
+
+FormPostUser.propTypes = {
+    setIsSuccessfullyRegistered: PropTypes.func
+};
