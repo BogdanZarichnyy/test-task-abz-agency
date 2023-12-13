@@ -5,42 +5,53 @@ import scss from './CustomPhotoUploadInput.module.scss';
 
 const extensionsForPhotoUser = [ '.jpeg', '.jpg' ];
 
-const CustomPhotoUploadInput = ({ children, as = 'input', setFieldValue, setFieldTouched, handleChange, error, touched, type, name, file }) => {
+const CustomPhotoUploadInput = ({ children, as = 'input', setFieldValue, error, touched, type, name }) => {
     const labelForCustomPhotoUploadInput = children.props.children;
     const [textInfoForPhotoUploadAction, setTextInfoForPhotoUploadAction] = useState(labelForCustomPhotoUploadInput);
-    const [preview, setPreview] = useState(null);
 
-    if (!!file) {
-        console.log(file);
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            setPreview(reader.result);
-        };
-    }
+    // const [preview, setPreview] = useState(null);
+    // const [photo, setPhoto] = useState(undefined);
+
+    // if (!!file) {
+    //     // console.log(file);
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onload = () => {
+    //         setPreview(reader.result);
+    //     };
+    // }
+
+    // console.log(file);
     
     return (
         <>
             <Field as={as}
                 onChange={async (event) => {
-                    // console.log(event.target.files[0]);
                     await setFieldValue(name, event.target.files[0])
+                    // setPhoto(event.target.files[0]);
                     setTextInfoForPhotoUploadAction(event.target.files[0].name);
-                    // setFieldTouched(name);
-                    handleChange(event);
                 }}
                 className={scss.customPhotoUploadInput} 
                 type={type} name={name} id={name}
                 accept={extensionsForPhotoUser.join(',')}
+                value={undefined}
             />
-            <label className={scss.textLabel} htmlFor={name}>
-                <span className={scss.labelButton}>Upload</span>
-                <span className={scss.labelInfo}>{textInfoForPhotoUploadAction}</span>
-            </label>
-            <ErrorMessage className={[scss.errorFeedback, error && touched && scss.isErrorFeedback].join(" ")} name={name} component="span" />
-            <div>
-                <img src={preview} alt="preview" width="200px" />
-            </div>
+             
+            <span className={[scss.uploadButton, error && touched && scss.isErrorUploadButton].join(" ")}>
+                Upload
+            </span>
+            <span className={[scss.uploadTextInfo, error && touched && scss.isErrorUploadTextInfo].join(" ")} 
+                title={textInfoForPhotoUploadAction}
+            >
+                {textInfoForPhotoUploadAction}
+            </span>
+
+            <ErrorMessage className={[scss.errorFeedback, error && touched && scss.isErrorFeedback].join(" ")} 
+                name={name} 
+                component="span" 
+            />
+            
+            {/* {!!preview && <img className={scss.previewPhoto} src={preview} alt="preview" width="200px" />} */}
         </>
     );
 };

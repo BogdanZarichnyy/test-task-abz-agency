@@ -1,54 +1,39 @@
-import { createSlice, current  } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-// import { getUsersThunk, addUsersThunk, updateUserThunk } from "../thunks/usersThunk";
+import { getUsersThunk } from "../thunks/usersThunk";
 
 const usersSlice = createSlice({
     name: "usersSlice",
     initialState: {
-        users: {
-            users: [],
-            nextUrl: '',
-            page: 1,
-            count: 6
+        users: [],
+        nextUrl: '',
+        page: 1,
+        count: 6,
+        isLoading: false
+    },
+
+    reducers: {
+        setPage(state, action) {
+            state.page = action.payload;
         },
     },
-    reducers: {
 
-        getUserFirst: {
-            reducer( state, action) {
-                state.users = action.payload;
-            },
-            prepare(users) {
-                return {
-                    payload: users,
-                }
-            }
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getUsersThunk.pending, (state, action) => {
+                state.isLoading = true;
+            })
+            .addCase(getUsersThunk.fulfilled, (state, action) => {
+                state.users = state.page === 1 ? action.payload.users : [...state.users, ...action.payload.users];
+                state.nextUrl = action.payload.users.length === 0 ? '' : action.payload.links.next_url;
+                state.isLoading = false;
+            })
+            .addCase(getUsersThunk.rejected, (state, action) => {
+                state.isLoading = false;
+            })
+    },
 
-        getMoreUser: {
-            reducer( state, action) {
-                state.users.users = [...current(state.users.users), ...action.payload];
-            },
-            prepare(users) {
-                return {
-                    payload: users,
-                }
-            }
-        },
-
-        setNextUrlUsers: {
-            reducer( state, action) {
-                state.users.nextUrl = action.payload;
-            },
-            prepare(nextUrl) {
-                return {
-                    payload: nextUrl,
-                }
-            }
-        }
-
-    }
 });
 
-export const { getUserFirst, getMoreUser, setNextUrlUsers } = usersSlice.actions;
+export const { setPage } = usersSlice.actions;
 export const reducerUsers = usersSlice.reducer;

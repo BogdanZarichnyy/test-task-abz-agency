@@ -3,9 +3,7 @@ import * as Yup from 'yup';
 const validFileExtensions = { image: ['jpg', 'jpeg'] };
 
 const isValidFileType = (fileName, fileType) => {
-    console.log(fileName.name);
-    console.log(fileName.size);
-    // return fileName && validFileExtensions[fileType].indexOf(fileName.toLowerCase().split('.').pop()) > -1;
+    return fileName && validFileExtensions[fileType].indexOf(fileName.name.toLowerCase().split('.').pop()) > -1;
 }
 
 const yupSchema = Yup.object().shape({
@@ -27,24 +25,12 @@ const yupSchema = Yup.object().shape({
     photo: Yup.mixed()
         .test("is-valid-type", "Not a valid image type - select image type *.jpg or .*jpeg",
             (filePhotoUser) => isValidFileType(filePhotoUser, "image"))
-        // .test("is-valid-size", "The file must not exceed 5 MB", 
-        //     (filePhotoUser, filePhotoUserInfo) => {
-        //         console.log(filePhotoUser);
-        //         console.log(filePhotoUserInfo);
-        //         if (!filePhotoUser.length) return true;
-        //         return filePhotoUser.size <= 50000000;
-        //     })
-        // .test({
-        //     message: 'Please provide a supported file type',
-        //     test: (file, context) => {
-        //     console.log(file);
-        //     console.log(context);
-        //         // const isValid = ['png', 'pdf'].includes(getExtension(file?.name));
-        //         // if (!isValid) context?.createError();
-        //         // return isValid;
-        //     }
-        //   })
-        .required('Photo is required')
+        .test("is-valid-size", "The file must not exceed 5 MB", 
+            (filePhotoUser) => {
+                if (!filePhotoUser) return true;
+                return filePhotoUser.size <= 50000000;
+            })
+        .required('Photo is required. Minimum size of photo 70x70px')
 });
 
 export default yupSchema;

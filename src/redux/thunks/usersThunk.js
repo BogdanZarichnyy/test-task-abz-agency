@@ -1,16 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setNextUrlUsers } from "../slices/usersSlice";
 
-// export const url = new URL('https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6');
-export const url = new URL('https://frontend-test-assignment-api.abz.agency/api/v1/users');
+import { getToken } from '../../api/fetching';
 
-export const getUsersThunk = createAsyncThunk("/", async (_, thunkAPI) => {
+const urlFetchRequestForGetUsers = new URL('https://frontend-test-assignment-api.abz.agency/api/v1/users');
+
+export const getUsersThunk = createAsyncThunk("users/getUsersThunk", async (_, thunkAPI) => {
     try {
-        url.searchParams.append('completed', false);
-        url.searchParams.append('page', thunkAPI.getState().users.page);
-        url.searchParams.append('count', thunkAPI.getState().users.count);
-        const response = await fetch(`${url}`).then(response => response.json());
-        console.log(response);
+        urlFetchRequestForGetUsers.searchParams.set('page', thunkAPI.getState().users.page);
+        urlFetchRequestForGetUsers.searchParams.set('count', thunkAPI.getState().users.count);
+        const response = await fetch(`${urlFetchRequestForGetUsers}`).then(response => response.json());
         return response;
     }
     catch (error) {
@@ -18,17 +16,39 @@ export const getUsersThunk = createAsyncThunk("/", async (_, thunkAPI) => {
     }
 });
 
-export const getMoreUsersThunk = createAsyncThunk("/", async (_, thunkAPI) => {
+export const postUserThunk = createAsyncThunk("users/postUser", async ({ formData, setIsSuccessfullyRegistered }, thunkAPI) => {
     try {
-        url.searchParams.append('completed', false);
-        url.searchParams.set('page', thunkAPI.getState().filter.page);
-        // const response = await fetch(`${url}`).then(response => { return response.json() });
-        // if (response.length === 0 || response.length < thunkAPI.getState().filter.limit) {
-        //     thunkAPI.dispatch(setNextUrlUsers(false));
-        // }
-        // return response;
+        let userToken = localStorage.getItem("token");
+        if (!userToken) {
+            userToken = getToken();
+        }
+        const parsedUserToken = JSON.parse(userToken);
+
+        urlFetchRequestForGetUsers.searchParams.delete('page');
+        urlFetchRequestForGetUsers.searchParams.delete('count');
+
+        const response = await fetch(`${urlFetchRequestForGetUsers}`,
+            { 
+                method: 'POST', 
+                body: formData, 
+                headers: { 
+                    // 'Content-Type': 'multipart/form-data', 
+                    'Token': parsedUserToken 
+                } 
+            })
+            .then(response => {
+                setIsSuccessfullyRegistered(true);
+                return response.json()
+            });
+
+        if (response.success) {
+            thunkAPI.dispatch(getUsersThunk());
+        }
     }
     catch (error) {
         return thunkAPI.rejectWithValue(error.message);
+    }
+    finally {
+        setTimeout(() => setIsSuccessfullyRegistered(false), 2000);
     }
 });

@@ -1,0 +1,15 @@
+@import '../../sass/utils/variables';
+@import '../../sass/utils/functions';
+@import '../../sass/utils/mixins';
+
+.successfullyImage {
+    display: block;
+    margin: 50px auto 100px;
+}
+
+.successfullyText {
+    padding: 17px 0;
+    border-top: 1px solid getColor('border-desc');
+    @include font();
+    color: getColor('text-main');
+}

@@ -12,10 +12,44 @@
     z-index: -1;
 }
 
+.uploadButton {
+    display: inline-block;
+    color: getColor('text-main');
+    // padding: 14px 15px;
+    padding: 13px 15px;
+    border: 1px solid getColor('text-main');
+    border-radius: 4px 0 0 4px;
+    @include font();
+}
 
+.uploadTextInfo {
+    display: inline-block;
+    color: getColor('text-desc');
+    // padding: 14px 15px;
+    padding: 13px 15px;
+    border: 1px solid getColor('border-desc');
+    border-radius: 0 4px 4px 0;
+    border-left: none;
+    @include font();
+    width: calc(100% - 83px);
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+.isErrorUploadButton {
+    padding: 12px 15px 12px 14px;
+    border: 2px solid getColor('error');
+    border-radius: 4px 0 0 4px;
+}
 
-
+.isErrorUploadTextInfo {
+    padding: 12px 15px 12px 14px;
+    border: 2px solid getColor('error');
+    border-radius: 0 4px 4px 0;
+    border-left: none;
+}
 
 .errorFeedback {
     position: absolute;
@@ -27,4 +61,10 @@
 
 .isErrorFeedback {
     color: getColor('error');
+}
+
+.previewPhoto {
+    margin: 0 auto;
+    height: 200px;
+    width: auto;
 }

@@ -7,6 +7,12 @@ import Button from '../button/Button';
 
 import yupSchema from '../../validation/yupSchema';
 
+import { useDispatch } from 'react-redux';
+import { postUserThunk } from '../../redux/thunks/usersThunk';
+import { setPage } from '../../redux/slices/usersSlice';
+
+// import { postAddUser } from '../../api/fetching';
+
 import scss from './FormPostUser.module.scss';
 
 const initialDataForRegistrationUser = {
@@ -14,15 +20,27 @@ const initialDataForRegistrationUser = {
     email: '',
     phone: '',
     position_id: 1,
-    photo: ''
+    photo: undefined
 }
 
-const FormPostUser = () => {
+const FormPostUser = ({ setIsSuccessfullyRegistered }) => {
+    const dispatch = useDispatch();
 
     const handlerRegistrationUser = (values, actions) => {
-        console.log(values);
+        const formData = new FormData();
+        formData.append('position_id', values.position_id);
+        formData.append('name', values.name);
+        formData.append('email', values.email);
+        formData.append('phone', values.phone);
+        formData.append('photo', values.photo);
+        
+        // postAddUser(formData, setIsSuccessfullyRegistered);
+
+        dispatch(setPage(1));
+        dispatch(postUserThunk({ formData, setIsSuccessfullyRegistered }));
+        
         actions.setSubmitting(false);
-        // actions.resetForm();
+        actions.resetForm(initialDataForRegistrationUser);
     }
 
     return (
@@ -81,9 +99,7 @@ const FormPostUser = () => {
                         styleLabel={scss.labelInputPhotoUpload} 
                         CustomComponent={CustomPhotoUploadInput} 
                         setFieldValue={setFieldValue}
-                        setFieldTouched={setFieldTouched}
-                        handleChange={handleChange}
-                        file={values.photo}
+                        // file={values.photo}
                     />
 
                     <Button styles={scss.buttonSubmit} text="Sign up" type="submit" disabled={!isDisableSubmit} />

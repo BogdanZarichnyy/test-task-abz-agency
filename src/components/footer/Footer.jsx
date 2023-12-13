@@ -1,28 +1,23 @@
-// import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import FormPostUser from '../formPostUser/FormPostUser';
 import textsHeaders from '../../assets/texts/textsHeaders';
-
-// import { getPositions } from '../../api/fetching';
-// import { usePositionsUsers } from '../../hooks/usePositionsUsers';
+import Successfully from '../successfully/Successfully';
 
 import scss from './Footer.module.scss';
 
 const Footer = () => {
-    // const [positions, setPositions] = useState([]);
-
-    // usePositionsUsers(setPositions);
-
-    // useEffect(() => {
-    //     getPositions(setPositions);
-    // }, []);
+    const [isSuccessfullyRegistered, setIsSuccessfullyRegistered] = useState(false);
 
     return (
-        <footer className={scss.footer}>
+        <footer className={[scss.footer, isSuccessfullyRegistered && scss.successfully].join(" ")}>
             <div className='container'>
 
-                <h2 className={scss.title}>{textsHeaders.footer}</h2>
-
-                <FormPostUser />
+                <h2 className={scss.title}>{!isSuccessfullyRegistered ? textsHeaders.footer : textsHeaders.successfully}</h2>
+                
+                {!isSuccessfullyRegistered
+                    ? <FormPostUser setIsSuccessfullyRegistered={setIsSuccessfullyRegistered}/>
+                    : <Successfully />
+                }
 
             </div>
         </footer>
